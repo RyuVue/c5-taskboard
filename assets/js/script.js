@@ -1,6 +1,7 @@
 // Retrieve tasks and nextId from localStorage
-const taskList = JSON.parse(localStorage.getItem("tasks"));
+const taskList = JSON.parse(localStorage.getItem("tasks")) || [];
 const nextId = JSON.parse(localStorage.getItem("nextId"));
+
 
 // html elements
 const saveChangeBtn = document.getElementById('saveChangeBtn');
@@ -29,12 +30,24 @@ function renderTaskList() {
 }
 
 // Todo: create a function to handle adding a new task
+function saveTaskToLocalStorage(task) {
+    taskList.push(task);
+    localStorage.setItem('taskList', JSON.stringify(taskList));
+}
 function handleAddTask(event){
     event.preventDefault();
+    const id = generateTaskId()
     const title = modalTaskTitle.value;
     const dueDate = modalDatePicker.value;
     const description = modalTaskDescription.value;
-    
+
+    const task = {}
+    task.id = id
+    task.title = title
+    task.dueDate = dueDate
+    task.description = description
+    console.log(task, 'testing') 
+    saveTaskToLocalStorage(task)
 }
 
 // Todo: create a function to handle deleting a task
