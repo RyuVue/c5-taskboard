@@ -35,13 +35,14 @@ todoCards.appendChild(postElement);
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
-    
-}
+        const taskList = JSON.parse(localStorage.getItem('tasks')) || [];
+        console.log(taskList, 'testing')
+    }
 
 // Todo: create a function to handle adding a new task
 function saveTaskToLocalStorage(task) {
     taskList.push(task);
-    localStorage.setItem('taskList', JSON.stringify(taskList));
+    localStorage.setItem('tasks', JSON.stringify(taskList));
 }
 function handleAddTask(event){
     event.preventDefault();
@@ -55,7 +56,6 @@ function handleAddTask(event){
     task.title = title
     task.dueDate = dueDate
     task.description = description
-    console.log(task, 'testing') 
     saveTaskToLocalStorage(task)
 }
 
@@ -75,6 +75,6 @@ $(document).ready(function () {
     saveChangeBtn.addEventListener("click", function (event) {
         handleAddTask(event)
       });
-
+      renderTaskList()
 });
 
