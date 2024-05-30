@@ -8,6 +8,7 @@ const saveChangeBtn = document.getElementById('saveChangeBtn');
 const modalTaskTitle = document.getElementById('modalTaskTitle');
 const modalDatePicker = document.getElementById('modalDatePicker');
 const modalTaskDescription = document.getElementById('modalTaskDescription');
+const todoCards = document.getElementById('todo-cards')
 
  const renderDatePicker = function () {
     $( "#modalDatePicker" ).datepicker();
@@ -21,7 +22,15 @@ function generateTaskId() {
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
-    const taskCard = generateTaskId();
+    postElement.innerHTML = `
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">${task.title}</h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary">${task.dueDate}</h6>
+    <p class="card-text">${task.description}</p>
+  </div>
+</div>`;
+todoCards.appendChild(postElement);
 }
 
 // Todo: create a function to render the task list and make cards draggable
